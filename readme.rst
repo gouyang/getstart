@@ -1,12 +1,26 @@
 #########
 Get start
 #########
-Most of the examples is based on Fedora.
+Most of the examples are based on Fedora.
 
 Window manager
 ==============
 
 - awesome
+
+  * install::
+      
+      yum install awesome
+
+  * configure::
+
+      cp /etc/xdg/awesome/ ~/.config/awesome
+
+  * theme::
+
+      cp -R /usr/share/awesome/themes ~/.config/awesome
+      vi rc.lua with theme line as below:
+      beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
 
 Programming Language
 ====================
