@@ -53,11 +53,9 @@ Database
 
   * basic usage::
 
-      > show dbs
+      > show dbs // show all dbs on host
 
-      > db mydb
-
-      > use mydb
+      > use testdb
 
       > db
 
@@ -68,6 +66,8 @@ Database
       > db.testdb.findOne()
 
       > db.testdb.find()
+
+      > db.testdb.remove({url: "https://github.com"})
 
       > for (j=0; j<10; j++) db.testdb.insert(i)
 
