@@ -59,6 +59,8 @@ Database
 
       > db
 
+      > show collections
+
       > var i = {"name": "test", "version": 1}
 
       > db.testdb.insert(i)
@@ -83,6 +85,32 @@ Database
       on remote server connect by
 
       mongo 192.168.1.2:27017/mydb
+
+- **redis**
+
+  * install::
+
+      yum install redis
+
+  * daemon::
+
+      systemctl start redis
+
+  * client::
+     
+      redis-cli
+
+  * basic usage::
+
+      set password::
+
+          uncomment `# requirepass foobared`
+
+      get all keys::
+
+          127.0.0.1:6379> keys *
+
+  * [commands](http://redis.io/commands)
 
 - **mariadb**
 
