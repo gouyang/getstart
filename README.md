@@ -10,71 +10,60 @@ Collect get starts.
 
 ## Window manager
 
-- awesome
+### awesome
 
-  * install::
+- install
       
-      yum install awesome
+    # yum install awesome
 
-  * configure::
+- configure
 
-      cp /etc/xdg/awesome/ ~/.config/awesome
+    # cp /etc/xdg/awesome/ ~/.config/awesome
 
-  * theme::
+- theme
 
-      cp -R /usr/share/awesome/themes ~/.config/awesome
-      vi rc.lua with theme line as below:
-      beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
+    # cp -R /usr/share/awesome/themes ~/.config/awesome
+    # vi rc.lua with theme line as below:
+        beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
 
 ## Database
 
-- **mongodb**
+### mongodb
 
-  * install::
+- install
 
-      yum install mongodb-server
+    # yum install mongodb-server
 
-  * daemon::
+- daemon
 
-      systemctl start mongod
+    # systemctl start mongod
 
-  * client::
+- client
 
-      mongo
+    # mongo
 
-  * basic usage::
+- basic usage
 
-      > show dbs // show all dbs on host
+    > show dbs // show all dbs on host
+    > use testdb
+    > db
+    > show collections
+    > var i = {"name": "test", "version": 1}
+    > db.testdb.insert(i)
+    > db.testdb.findOne()
+    > db.testdb.find()
+    > db.testdb.remove({url: "https://github.com"})
+    > for (j=0; j<10; j++) db.testdb.insert(i)
+    > db.testdb.find().limit(3)
 
-      > use testdb
-
-      > db
-
-      > show collections
-
-      > var i = {"name": "test", "version": 1}
-
-      > db.testdb.insert(i)
-
-      > db.testdb.findOne()
-
-      > db.testdb.find()
-
-      > db.testdb.remove({url: "https://github.com"})
-
-      > for (j=0; j<10; j++) db.testdb.insert(i)
-
-      > db.testdb.find().limit(3)
-
-  * remote access::
+- remote access
       
-      on mongod server
+    on mongod server
 
-      vi  /etc/mongodb.conf
+    vi  /etc/mongodb.conf
       bind_ip = 0.0.0.0
 
-      on remote server connect by
-
+    on remote server connect by
       mongo 192.168.1.2:27017/mydb
 
 - **redis**
