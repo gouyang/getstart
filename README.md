@@ -19,7 +19,7 @@ Collect get starts.
 - install
       
     ```
-    # yum install awesome
+    # yum install awesome -y
     ```
 
 - configure
@@ -60,6 +60,8 @@ Collect get starts.
 
 - basic usage
 
+    ```
+    # mongo
     > show dbs // show all dbs on host
     > use testdb
     > db
@@ -71,142 +73,178 @@ Collect get starts.
     > db.testdb.remove({url: "https://github.com"})
     > for (j=0; j<10; j++) db.testdb.insert(i)
     > db.testdb.find().limit(3)
+    ```
 
 - remote access
       
-    on mongod server
+    on mongod server(192.168.1.2)
 
-    vi  /etc/mongodb.conf
-      bind_ip = 0.0.0.0
+    ```
+    # vi /etc/mongodb.conf
+        bind_ip = 0.0.0.0
+    ```
 
-    on remote server connect by
-      mongo 192.168.1.2:27017/mydb
+    on remote server
 
-- **redis**
+    ```
+    # mongo 192.168.1.2:27017/mydb
+    ```
 
-  * install::
+### redis
 
-      yum install redis
+- install
 
-  * daemon::
+    ```
+    # yum install redis -y
+    ```
 
-      systemctl start redis
+- daemon
 
-  * client::
+    ```
+    # systemctl start redis
+    ```
+
+- client
      
-      redis-cli
+    ```
+    # redis-cli
+    ```
 
-  * basic usage::
+- basic usage
 
-      set password::
+    Set password, uncomment below line in /etc/redis.conf and change password to yours
 
-          uncomment `# requirepass foobared`
+    ```
+    # requirepass foobared
+    ```
 
-      get all keys::
+    Get all keys
 
-          127.0.0.1:6379> keys *
+    ```
+    127.0.0.1:6379> keys *
+    ```
 
-  * [commands](http://redis.io/commands)
+- [commands](http://redis.io/commands)
 
-- **mariadb**
+### mariadb
 
-  * install::
+- install
 
-      yum install mariadb-server
+    ```
+    # yum install mariadb-server -y
+    ```
 
-  * daemon::
+- daemon
 
-      systemctl start mariadb
+    ```
+    # systemctl start mariadb
+    ```
 
-  * setup::
+- setup
 
-      mysql_secure_installation
+    ```
+    # mysql_secure_installation
+    ```
 
-  * client::
+- client
 
-      mysql
+    ```
+    # mysql
+    ```
 
-  * basic usage::
+- basic usage
 
-      > show databases;
+    ```
+    > show databases;
+    > use test;
+    > show tables;
+    > create table testtable (name varchar(10), age int(4));
+    > insert into testtable values ('test', 2014);
+    ```
 
-      > use test;
+- remote access
 
-      > show tables;
-
-      > create table testtable (name varchar(10), age int(4));
-
-      > insert into testtable values ('test', 2014);
-
-  * remote access::
-
-      > grant all privileges on test.* to admin@'%' identified by
+    ```
+    > grant all privileges on test.* to admin@'%' identified by
       'password' with grant option;
+    ```
 
-      #change '%' to remote hostname will be much better
+    Note: change '%' to remote hostname will be much better
 
-- **postgresql**
+### postgresql
 
-  * install::
+- install
 
-      yum install postgresql-server
-      postgresql-setup initdb
+    ```
+    # yum install postgresql-server -y
+    # postgresql-setup initdb
+    ```
 
-  * daemon::
+- daemon
 
-      systemctl start postgresql
+    ```
+    # systemctl start postgresql
+    ```
 
-  * client::
+- client
 
-      psql
+    ```
+    # psql
+    ```
 
-  * basic usage::
+- basic usage
 
-      $ su - postgres
-
-      $ createdb mydb or
-
+    ```
+    $ su - postgres
+    $ createdb mydb or
       > create database mydb owner postgres
-
-      $ createuser lenny or 
-
+    $ createuser lenny or 
       > create user lenny with password 'securepasswd'
+    ```
 
-  * Remote access::
+- remote access
 
-      vi /var/lib/pgsql/data/postgresql.conf
-
+    ```
+    # vi /var/lib/pgsql/data/postgresql.conf
       change listen_address to "*"
-
-      vi pg_hba.conf
-
+    # vi pg_hba.conf
       add line such as
-
       host mydb lenny 192.168.1.2 255.255.255.0 trust
+    ```
 
 ## SSL certificates
 
-- Step one - Install Mod SSL::
+- Step one - Install Mod SSL
 
+    ```
     # yum install mod_ssl -y
+    ```
 
-- Step two - Create a self-signed certificate::
+- Step two - Create a self-signed certificate
 
+    ```
     # mkdir /etc/httpd/ssl
     # cd /etc/httpd/ssl
     # openssl genrsa -out ca.key 2048
     # openssl req -new -key ca.key -out ca.csr
     # openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
+    ```
 
-or::
+    or
 
+    ```
     # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/httpd/ssl/ca.key -out /etc/httpd/ssl/ca.crt
+    ```
 
-- Step three - Setup the certificate::
+- Step three - Setup the certificate
 
+    ```
     # vi /etc/httpd/conf.d/ssl.conf
       SSLEngine on
       SSLCertificateFile /etc/httpd/ssl/ca.crt
       SSLCertificateKeyFile /etc/httpd/ssl/ca.key 
+    ```
 
+    ```
     # systemctl restart httpd
+    ```
