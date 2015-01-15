@@ -210,11 +210,15 @@ Collect get starts.
 
     
     edit /var/lib/pgsql/data/postgresql.conf
-      change listen_address to "*"
+    ```
+    listen_address = "*"
+    ```
 
-    vi pg_hba.conf
-      add line such as
-      host mydb lenny 192.168.1.2 255.255.255.0 trust
+    edit pg_hba.conf add line such as
+
+    ```
+    host mydb lenny 192.168.1.2 255.255.255.0 trust
+    ```
 
 ## SSL certificates
 
