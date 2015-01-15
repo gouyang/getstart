@@ -4,9 +4,13 @@ Collect get starts.
 
 ### Contents
 
-- [Window manager](window-manager)
-- [Database](database)
-- [SSL certificates](ssl-certificates)
+- [Window manager](#window-manager)
+- [Database](#database)
+    - [mongodb](#mongodb)
+    - [redis](#redis)
+    - [mariadb](#mariadb)
+    - [postgresql](#postgresql)
+- [SSL certificates](#ssl-certificates)
 
 ## Window manager
 
@@ -14,17 +18,23 @@ Collect get starts.
 
 - install
       
+    ```
     # yum install awesome
+    ```
 
 - configure
 
+    ```
     # cp /etc/xdg/awesome/ ~/.config/awesome
+    ```
 
 - theme
 
+    ```
     # cp -R /usr/share/awesome/themes ~/.config/awesome
     # vi rc.lua with theme line as below:
         beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
+    ```
 
 ## Database
 
@@ -32,15 +42,21 @@ Collect get starts.
 
 - install
 
+    ```
     # yum install mongodb-server
+    ```
 
 - daemon
 
+    ```
     # systemctl start mongod
+    ```
 
 - client
 
+    ```
     # mongo
+    ```
 
 - basic usage
 
