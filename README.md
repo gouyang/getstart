@@ -1,10 +1,14 @@
-#########
-Get start
-#########
-Most of the examples are based on Fedora.
+# Get start
 
-Window manager
-==============
+Collect get starts.
+
+### Contents
+
+- [Window manager](window-manager)
+- [Database](database)
+- [SSL certificates](ssl-certificates)
+
+## Window manager
 
 - awesome
 
@@ -22,20 +26,7 @@ Window manager
       vi rc.lua with theme line as below:
       beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
 
-Programming Language
-====================
-
-- Python
-
-  * yum install python python-devel
-
-- Javascript
-
-- Go
-
-
-Database
-========
+## Database
 
 - **mongodb**
 
@@ -188,14 +179,13 @@ Database
 
       host mydb lenny 192.168.1.2 255.255.255.0 trust
 
-Using self-signed certificates
-==============================
+## SSL certificates
 
-Step one - Install Mod SSL::
+- Step one - Install Mod SSL::
 
     # yum install mod_ssl -y
 
-Step two - Create a self-signed certificate::
+- Step two - Create a self-signed certificate::
 
     # mkdir /etc/httpd/ssl
     # cd /etc/httpd/ssl
@@ -207,7 +197,7 @@ or::
 
     # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/httpd/ssl/ca.key -out /etc/httpd/ssl/ca.crt
 
-Step three - Setup the certificate::
+- Step three - Setup the certificate::
 
     # vi /etc/httpd/conf.d/ssl.conf
       SSLEngine on
@@ -215,5 +205,3 @@ Step three - Setup the certificate::
       SSLCertificateKeyFile /etc/httpd/ssl/ca.key 
 
     # systemctl restart httpd
-
-
