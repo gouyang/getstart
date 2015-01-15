@@ -160,3 +160,32 @@ Database
 
       host mydb lenny 192.168.1.2 255.255.255.0 trust
 
+Using self-signed certificates
+==============================
+
+Step one - Install Mod SSL::
+
+    # yum install mod_ssl -y
+
+Step two - Create a self-signed certificate::
+
+    # mkdir /etc/httpd/ssl
+    # cd /etc/httpd/ssl
+    # openssl genrsa -out ca.key 2048
+    # openssl req -new -key ca.key -out ca.csr
+    # openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
+
+or::
+
+    # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/httpd/ssl/ca.key -out /etc/httpd/ssl/ca.crt
+
+Step three - Setup the certificate::
+
+    # vi /etc/httpd/conf.d/ssl.conf
+      SSLEngine on
+      SSLCertificateFile /etc/httpd/ssl/ca.crt
+      SSLCertificateKeyFile /etc/httpd/ssl/ca.key 
+
+    # systemctl restart httpd
+
+
