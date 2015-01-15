@@ -32,8 +32,12 @@ Collect get starts.
 
     ```
     # cp -R /usr/share/awesome/themes ~/.config/awesome
-    # vi rc.lua with theme line as below:
-        beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
+    ```
+
+    edit rc.lua with theme line as below:
+
+    ```
+    beautiful.init(awful.util.getdir("config") .."/themes/default/theme.lua")
     ```
 
 ## Database
@@ -43,7 +47,7 @@ Collect get starts.
 - install
 
     ```
-    # yum install mongodb-server
+    # yum install mongodb-server -y
     ```
 
 - daemon
@@ -78,10 +82,10 @@ Collect get starts.
 - remote access
       
     on mongod server(192.168.1.2)
+    edit /etc/mongodb.conf
 
     ```
-    # vi /etc/mongodb.conf
-        bind_ip = 0.0.0.0
+    bind_ip = 0.0.0.0
     ```
 
     on remote server
@@ -124,7 +128,7 @@ Collect get starts.
     127.0.0.1:6379> keys *
     ```
 
-- [commands](http://redis.io/commands)
+- [ALL redis cli commands](http://redis.io/commands)
 
 ### mariadb
 
@@ -204,13 +208,13 @@ Collect get starts.
 
 - remote access
 
-    ```
-    # vi /var/lib/pgsql/data/postgresql.conf
+    
+    edit /var/lib/pgsql/data/postgresql.conf
       change listen_address to "*"
-    # vi pg_hba.conf
+
+    vi pg_hba.conf
       add line such as
       host mydb lenny 192.168.1.2 255.255.255.0 trust
-    ```
 
 ## SSL certificates
 
